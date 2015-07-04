@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+	<classPathEntry
+		location="C:\Users\Roy\Desktop\work\workspace\BeiBei\WebContent\WEB-INF\lib\mysql-connector-java-5.0.7-bin.jar" />
+	<context id="context1">
+
+
+
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 这个最好设置成false 否则容易出现重复代码 -->
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/clc_data" userId="root"
+			password="1234" />
+		<javaModelGenerator targetPackage="com.beibei.erp.bean"
+			targetProject="BeiBei" />
+		<sqlMapGenerator targetPackage="com.beibei.erp.mapper"
+			targetProject="BeiBei" />
+		<javaClientGenerator targetPackage="com.beibei.erp.mapper"
+			targetProject="BeiBei" type="XMLMAPPER" />
+
+
+		<!-- 
+		<table schema="" tableName="product" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="p_id" property="p_id"
+				javaType="int" jdbcType="INTEGER" />
+			<columnOverride column="p_num" property="p_num"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_my_num" property="p_my_num"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_name" property="p_name"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_abbreviation" property="p_abbreviation"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_barcode" property="p_barcode"
+				javaType="String" jdbcType="INTEGER" />
+			<columnOverride column="p_unit" property="p_unit"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_size" property="p_size"
+				javaType="String" jdbcType="INTEGER" />
+			<columnOverride column="p_class_id" property="p_class_id"
+				javaType="int" jdbcType="VARCHAR" />
+			<columnOverride column="p_cost" property="p_cost"
+				javaType="double" jdbcType="VARCHAR" />
+			<columnOverride column="p_price" property="p_price"
+				javaType="double" jdbcType="VARCHAR" />
+			<columnOverride column="p_source_id" property="p_source_id"
+				javaType="int" jdbcType="VARCHAR" />
+			<columnOverride column="p_pic" property="p_pic"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_actival" property="p_actival"
+				javaType="String" jdbcType="VARCHAR" />
+		
+			<columnOverride column="p_license" property="p_license"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_info" property="p_info"
+				javaType="String" jdbcType="VARCHAR" />
+				
+				<columnOverride column="p_address" property="p_address"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_count" property="p_count"
+				javaType="int" jdbcType="INTEGER" />
+
+		</table>
+		
+		
+		
+		<table schema="" tableName="purchase" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="purchase_id" property="purchase_id"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="signer" property="signer"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="create_date" property="create_date"
+				javaType="java.util.Date" jdbcType="DATE" />
+			<columnOverride column="total" property="total"
+				javaType="int" jdbcType="INTEGER" />
+			
+		</table>
+		-->
+		<table schema="" tableName="purchase_detail" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="purchase_id" property="purchase_id"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_id" property="p_id"
+				javaType="int" jdbcType="INTEGER" />
+			<columnOverride column="p_count_in" property="p_count_in"
+				javaType="int" jdbcType="INTEGER" />
+			<columnOverride column="p_price" property="p_price"
+				javaType="int" jdbcType="INTEGER" />
+			<columnOverride column="p_source_id" property="p_source_id"
+				javaType="int" jdbcType="INTEGER" />
+				<columnOverride column="supplier_id" property="supplier_id"
+				javaType="String" jdbcType="VARCHAR" />
+		</table>
+		
+		<!--
+		<table schema="" tableName="deliver" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="deliver_id" property="deliver_id"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="signer" property="signer"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="create_date" property="create_date"
+				javaType="java.util.Date" jdbcType="DATE" />
+			<columnOverride column="total" property="total"
+				javaType="int" jdbcType="INTEGER" />
+			<columnOverride column="customer" property="customer"
+				javaType="String" jdbcType="VARCHAR" />
+		</table>
+		
+		<table schema="" tableName="deliver_detail" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="deliver_id" property="deliver_id"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_id" property="p_id"
+				javaType="int" jdbcType="INTEGER" />
+			<columnOverride column="p_count_out" property="p_count_out"
+				javaType="int" jdbcType="INTEGER" />
+			<columnOverride column="p_price" property="p_price"
+				javaType="int" jdbcType="INTEGER" />
+		</table>
+		
+		 -->
+		 <table schema="" tableName="supplier" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="supplier_id" property="supplier_id"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="supplier_name" property="supplier_name"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="supplier_phone" property="supplier_phone"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="supplier_contact" property="supplier_contact"
+				javaType="String" jdbcType="VARCHAR" />
+		</table>
+		
+		 <table schema="" tableName="product_supplier" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="supplier_id" property="supplier_id"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="p_num" property="p_num"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="supplier_p_num" property="supplier_p_num"
+				javaType="String" jdbcType="VARCHAR" />
+		</table>
+		 
+	</context>
+</generatorConfiguration>
