@@ -328,12 +328,12 @@
       p_unit, p_size, p_class_id, 
       p_cost, p_price, p_source_id, 
       p_pic, p_actival, p_license, 
-      p_info, p_count)
+      p_info, p_count , p_address)
     values (#{p_num,jdbcType=VARCHAR}, #{p_my_num,jdbcType=VARCHAR}, 
       #{p_name,jdbcType=VARCHAR}, #{p_abbreviation,jdbcType=VARCHAR}, #{p_barcode,jdbcType=INTEGER}, 
       #{p_unit,jdbcType=VARCHAR}, #{p_size,jdbcType=INTEGER}, #{p_class_id,jdbcType=VARCHAR}, 
       #{p_cost,jdbcType=VARCHAR}, #{p_price,jdbcType=VARCHAR}, #{p_source_id,jdbcType=VARCHAR}, 
       #{p_pic,jdbcType=VARCHAR}, #{p_actival,jdbcType=VARCHAR}, #{p_license,jdbcType=VARCHAR}, 
-      #{p_info,jdbcType=VARCHAR}, #{p_count,jdbcType=INTEGER})
+      #{p_info,jdbcType=VARCHAR}, #{p_count,jdbcType=INTEGER},#{p_address,jdbcType=VARCHAR})
   </insert>
 </mapper>

@@ -30,7 +30,7 @@ public class PurchaseAction {
 		for (PurchaseDetail detail : purchase.getPurchaseDetailList()) {
 			int p_id = detail.getP_id();
 			product = productDao.selectByPid(p_id);
-			product.setP_count(product.getP_count() + detail.getP_count_in());
+			product.setP_count(product.getP_count() + detail.getP_count_in() + detail.getFree_count());
 			productDao.updateByPrimaryKey(product);
 		}
 	}

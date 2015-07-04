@@ -1,6 +1,7 @@
 package com.beibei.erp.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -19,7 +20,7 @@ public class ProductSupplierDao implements ProductSupplierMapper{
 	@Override
 	public int deleteByPrimaryKey(Integer pk) {
 		// TODO Auto-generated method stub
-		return 0;
+		return productSupplierMapper.deleteByPrimaryKey(pk);
 	}
 
 	@Override
@@ -56,6 +57,12 @@ public class ProductSupplierDao implements ProductSupplierMapper{
 	public List<ProductSupplier> selectByP_num(String p_num) {
 		// TODO Auto-generated method stub
 		return productSupplierMapper.selectByP_num(p_num);
+	}
+
+	@Override
+	public List<ProductSupplier> selectBySupplierAndLike(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return productSupplierMapper.selectBySupplierAndLike(map);
 	}
 
 }

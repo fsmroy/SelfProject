@@ -133,9 +133,11 @@
 			html = html + "<td>$<input type='text' value='' size='10' name='"
 					+ rtn["p_id"] + "p_price' onkeyup='checkNum(this);'></td>";
 
+			
+					
 			html = html + "<td><input type='text' value='' size='10' name='"
 					+ rtn["p_id"]
-					+ "p_source_id' onkeyup='checkNum(this);'></td>";
+					+ "free_count' onkeyup='checkNum(this);'></td>";
 
 			html = html
 					+ "<td><a href='javascript:void(0)' class='easyui-linkbutton' iconCls='icon-cancel' onclick='deleteThisELement(this);'>移除</a></td>";
@@ -221,8 +223,12 @@
 		if (inputStr.length >= 3) {
 
 			$("#queryInput").val(inputStr);
+			$("#queryType").val($('input[name=queryTypeRadio]:checked').val());
+			$("#querySupplier").val($("#supplierList").val());
+			
 
 			var data = $("#autoComplateForm").serialize();
+			
 			$.ajax({
 				async : false,
 				type : "POST",
@@ -232,10 +238,12 @@
 				//contentType : "text/html; charset=UTF-8",
 				dataType : "json",
 				success : function(rtn) {
-
+					
 					$("#queryStr").autocomplete({
 						source : rtn,
+						minLength: 0,
 						open : function() {
+							
 							$('#queryStr').autocomplete("widget").width(300);
 						},
 						select : function(event, ui) {
@@ -303,18 +311,15 @@
 								<td align="left">
 									<table>
 										<tr>
-											<td>
-											<label
-									style="font-size: 26px; font-weight: bold;">產品進貨</label>
+											<td><label style="font-size: 26px; font-weight: bold;">產品進貨</label>
 											</td>
-											<td>
-												<label><select class="form-control" id="supplierList"></select></label>
-											</td>
+											<td><label><select class="form-control"
+													id="supplierList" name='supplier_id'></select></label></td>
 										</tr>
 									</table>
-								
-								
-									</td>
+
+
+								</td>
 							</tr>
 							<tr height="60">
 								<td>&nbsp;</td>
@@ -324,39 +329,58 @@
 									<table border="0">
 										<tr>
 
-											<td></td>
-											<td align="right"><div class="row">
-													<div class="col-lg-6">
 
-														<div class="input-group">
-															<input type="text" class="form-control" id="barcodeStr"
-																onchange="queryDataByBarcode();"
-																onkeyup="queryDataByBarcode();"> <span
-																class="input-group-btn">
-																<button class="btn btn-default" type="button"
-																	onclick="queryDataByBarcode();">掃描進貨</button>
-															</span>
+											<td align="right" width="35%">
+												<table width="100%">
+													<tr>
+														<td>
 
-															<!-- /input-group -->
-														</div>
-													</div>
-													<!-- /.col-lg-6 -->
-												</div></td>
-											<td align="right"><div class="row">
 
-													<div class="col-lg-6">
+															<div class="input-group">
+																<input type="text" class="form-control" id="barcodeStr"
+																	onchange="queryDataByBarcode();"
+																	onkeyup="queryDataByBarcode();"> <span
+																	class="input-group-btn">
+																	<button class="btn btn-default" type="button"
+																		onclick="queryDataByBarcode();">掃描進貨</button>
+																</span>
 
-														<div class="input-group">
-															<input type="text" class="form-control" id="queryStr"
-																onkeyup="autocomplateQuery();"> <span
-																class="input-group-btn">
-																<button class="btn btn-default" type="button"
-																	onclick="queryDataByPnum();">搜尋進貨</button>
-															</span>
-															
-														</div>
-													</div>
-												</div></td>
+															</div>
+
+														</td>
+													</tr>
+												</table>
+
+											</td>
+											<td align="right" width="35%">
+												<table width="100%">
+													<tr>
+														<td>
+
+
+															<div class="input-group">
+																<input type="text" class="form-control" id="queryStr"
+																	onkeyup="autocomplateQuery();"> <span
+																	class="input-group-btn">
+																	<button class="btn btn-default" type="button"
+																		onclick="queryDataByPnum();">搜尋進貨</button>
+
+
+																</span>
+
+															</div>
+
+														</td>
+													</tr>
+												</table>
+
+											</td>
+
+											<td width="30%" align="left"><label class="radio-inline"><input
+													type="radio" name="queryTypeRadio" value="self"
+													checked="checked">產品名稱/編號</label> <label
+												class="radio-inline"><input type="radio"
+													name="queryTypeRadio" value="supplier">供應商編號</label></td>
 
 
 										</tr>
@@ -385,8 +409,8 @@
 											<td><label>規格</label></td>
 											<td><label>現存數量</label></td>
 											<td><label>進貨數量</label></td>
-											<td><label>進貨單價</label></td>
-											<td><label>供應商號</label></td>
+											<td><label>進貨單價</label></td>		
+											<td><label>搭贈數量</label></td>
 											<td><label>操作</label></td>
 										</tr>
 									</table></td>
@@ -417,6 +441,8 @@
 
 	<form id='autoComplateForm'>
 		<input type="hidden" name="queryInput" id="queryInput">
+		<input type="hidden" name="queryType" id="queryType">
+		<input type="hidden" name="supplier" id="querySupplier">
 	</form>
 
 

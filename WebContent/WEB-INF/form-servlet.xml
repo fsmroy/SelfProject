@@ -83,7 +83,7 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value>1234</value>
+			<value>abacus</value>
 		</property>
 		<property name="initialSize">
 			<value>10</value>

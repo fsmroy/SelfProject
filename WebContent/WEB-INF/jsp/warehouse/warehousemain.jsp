@@ -56,9 +56,8 @@
 
 
 <script language="javascript">
+	function querySupplier() {
 
-	function querySupplier(){
-		
 		$.ajax({
 			async : false,
 			type : "POST",
@@ -66,17 +65,19 @@
 			encoding : "UTF-8",
 			dataType : "json",
 			success : function(rtn) {
-				$.each(rtn,function(index, item) {
-							$("#barcodeSupplier_id").append("<option value='"+item.supplier_id+"'>"+item.supplier_name+"</option>");
+				$.each(rtn, function(index, item) {
+					$("#barcodeSupplier_id").append(
+							"<option value='"+item.supplier_id+"'>"
+									+ item.supplier_name + "</option>");
 
-						});
+				});
 
 			},
 			error : function(a, b, c) {
 				alert(a + "\n" + b + "\n" + c);
 			}
 		});
-		
+
 	}
 
 	function iniUpload(pnum) {
@@ -258,11 +259,11 @@
 				width : 40,
 				editor : 'text'
 			}/*, {
-							title : '上架',
-							field : 'p_actival',
-							width : 40,
-							editor : 'text'
-						}*/, {
+										title : '上架',
+										field : 'p_actival',
+										width : 40,
+										editor : 'text'
+									}*/, {
 				title : '倉庫位置',
 				field : 'p_address',
 				width : 80,
@@ -408,15 +409,15 @@
 				});
 
 	}
-	
+
 	function openBarcodedd() {
-		
+
 		var row = $('#ItemData').datagrid('getSelected');
 		$("#barcodeItem").html(row.p_name);
 		$("#barcodeP_num").val(row.p_num);
-		
+
 		querySupplierItem();
-		
+
 		$('#barcodedd').dialog(
 				{
 					title : '廠商條碼',
@@ -439,7 +440,7 @@
 				});
 
 	}
-	
+
 	function addSupplierItem() {
 		var data = $("#supplierItemForm").serialize();
 
@@ -461,29 +462,50 @@
 		});
 
 	}
-	
+
 	function querySupplierItem() {
-		
+
 		$("#supplierItemList").html("");
-		$.ajax({
-			async : false,
-			type : "POST",
-			url : "querySupplierItem?p_num="+$("#barcodeP_num").val(),
-			encoding : "UTF-8",
-			
-			//contentType : "text/html; charset=UTF-8",
-			dataType : "json",
-			success : function(rtn) {
-				$.each(rtn,function(index, item) {
-					$("#supplierItemList").append("<tr><td>"+item.supplier_id+"</td><td>"+item.supplier_p_num+"</td></tr>");
+		$("#supplierItemList")
+				.append(
+						"<tr><th align='center'><label>&nbsp;廠商</label></th><th align='center'><label>&nbsp;編號</label></th><th align='center'><label>&nbsp;動作</label></th></tr>");
+		$
+				.ajax({
+					async : false,
+					type : "POST",
+					url : "querySupplierItem?p_num=" + $("#barcodeP_num").val(),
+					encoding : "UTF-8",
 
+					//contentType : "text/html; charset=UTF-8",
+					dataType : "json",
+					success : function(rtn) {
+						$
+								.each(
+										rtn,
+										function(index, item) {
+
+											$("#supplierItemList")
+													.append(
+															"<tr><td>"
+																	+ item.supplier_name
+																	+ "</td><td>"
+																	+ item.supplier_p_num
+																	+ "</td><td><a href=\"#\" class=\"uiButton\" onclick=\"deleteSupplierItem('"
+																	+ item.pk
+																	+ "');\">刪除</a></td></tr>");
+
+										});
+						$(".uiButton").each(function() {
+							$(this).linkbutton({
+								iconCls : "icon-cancel"
+							});
+						});
+
+					},
+					error : function(a, b, c) {
+						alert(a + "\n" + b + "\n" + c);
+					}
 				});
-
-			},
-			error : function(a, b, c) {
-				alert(a + "\n" + b + "\n" + c);
-			}
-		});
 
 	}
 
@@ -552,14 +574,14 @@
 		$("#p_price").val(jsonObj["p_price"]);
 		$("#p_source_id").val(jsonObj["p_source_id"]);
 		$("#p_pic").val(jsonObj["p_pic"]);
-		$("#p_actival").children().each(function(){
-		    if ($(this).val()==jsonObj["p_actival"]){
-		        //jQuery給法
-		        $(this).attr("selected", "selected"); //或是給"selected"也可
+		$("#p_actival").children().each(function() {
+			if ($(this).val() == jsonObj["p_actival"]) {
+				//jQuery給法
+				$(this).attr("selected", "selected"); //或是給"selected"也可
 
-		    }
+			}
 		});
-		
+
 		//$("#p_actival").val(jsonObj["p_actival"]);
 		$("#p_info").val(jsonObj["p_info"]);
 		$("#p_address").val(jsonObj["p_address"]);
@@ -584,6 +606,23 @@
 		http.send();
 
 		return http.status != 404;
+
+	}
+	function deleteSupplierItem(pk) {
+
+		$.ajax({
+			async : false,
+			type : "POST",
+			url : "deleteSupplierItem?pk=" + pk,
+			encoding : "UTF-8",
+			dataType : "json",
+			success : function(rtn) {
+				querySupplierItem();
+			},
+			error : function(a, b, c) {
+				alert(a + "\n" + b + "\n" + c);
+			}
+		});
 
 	}
 </script>
@@ -710,7 +749,7 @@
 											<option value="1">上架</option>
 									</select></td>
 								</tr>
-							
+
 								<tr>
 									<td align="right"><label>資訊</label></td>
 									<td><input type="text" name='p_info' id='p_info'></td>
@@ -778,7 +817,7 @@
 					</tr>
 					<tr>
 						<td width="160" align="right"><label>產品編號</label></td>
-						<td><input type="text" name='p_num' id='addp_num' value=""></td>
+						<td><input type="text" name='p_num' id='addp_num' value="" maxlength="5"></td>
 
 					</tr>
 					<tr>
@@ -848,6 +887,16 @@
 						<td><input type="text" name='p_info' id='addp_info' value=""></td>
 
 					</tr>
+					<tr>
+						<td align="right"><label>倉庫位置</label></td>
+						<td><input type="text" name='p_address' id='addp_address'></td>
+
+					</tr>
+					<tr>
+						<td align="right"><label>認證</label></td>
+						<td><input type="text" name='p_license' id='addp_license'></td>
+
+					</tr>
 
 				</table>
 			</form>
@@ -861,50 +910,48 @@
 
 	<div style="display: none;">
 		<div id="barcodedd">
-			
-				<table class="tablecss1">
-					<tr>
-						<td align="center">
-							<label>廠商條碼(商品:<span id='barcodeItem'></span>)</label>
-							
-						 </td>
-					</tr>
-					<tr>
-						<td>
-						
+
+			<table class="tablecss1">
+				<tr>
+					<td align="center"><label>廠商條碼(商品:<span
+							id='barcodeItem'></span>)
+					</label></td>
+				</tr>
+				<tr>
+					<td>
+
 						<form id='supplierItemForm'>
 							<table width="100%">
 								<tr>
-								  <td>
-								  <input type="hidden" name="p_num" id='barcodeP_num'>
-								  	<select name="supplier_id" id="barcodeSupplier_id">
-								  	
-								  	</select>
-								  
-								  </td>
-								  <td><input type="text" name='supplier_p_num' id='barCodeSupplier_p_num' value=""></td>
-								  <td><button type="button" class="btn btn-info" onclick="addSupplierItem();" >新增</button></td>
+									<td><input type="hidden" name="p_num" id='barcodeP_num'>
+										<select name="supplier_id" id="barcodeSupplier_id">
+
+									</select></td>
+									<td><input type="text" name='supplier_p_num'
+										id='barCodeSupplier_p_num' value=""></td>
+									<td><button type="button" class="btn btn-info"
+											onclick="addSupplierItem();">新增</button></td>
 								</tr>
 							</table>
 						</form>
-						
-						</td>
-						
 
-					</tr>
-					<tr>
-						<td>
-							<table width="100%" id="supplierItemList">
-							
-							</table>
-						</td>
-					</tr>
-					
-					
-					
+					</td>
 
-				</table>
-			
+
+				</tr>
+				<tr>
+					<td>
+						<table width="100%" id="supplierItemList">
+
+						</table>
+					</td>
+				</tr>
+
+
+
+
+			</table>
+
 		</div>
 
 	</div>

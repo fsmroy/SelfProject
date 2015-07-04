@@ -195,5 +195,24 @@ public class SupplierController {
 		return mJSONArray.toString();
 
 	}
+	
+	@RequestMapping(value = "deleteSupplierItem", method = {
+			RequestMethod.GET, RequestMethod.POST }, produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String deleteSupplierItem(HttpServletRequest request,
+			HttpServletResponse response,String pk) {
+		HttpSession session = request.getSession();
+
+		
+		productSupplierDao.deleteByPrimaryKey(Integer.parseInt(pk));
+		
+		JSONObject mJSON = new JSONObject();
+		mJSON.put("success", "success");
+
+		return mJSON.toString();
+
+	}
+	
+	
 
 }

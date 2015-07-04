@@ -75,7 +75,7 @@ public class PurchaseController {
 
 		String signer = request.getParameter("signer");
 		String[] p_ids = request.getParameterValues("p_id");
-		String customer = request.getParameter("customer");
+		
 
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -89,6 +89,10 @@ public class PurchaseController {
 			int p_price = 0;
 			int p_count_in = Integer.parseInt(request
 					.getParameter(pid + "p_count_in"));
+			int free_count = 0;
+			if(request.getParameter(pid + "free_count")!=null){
+				free_count =  Integer.parseInt(request.getParameter(pid + "free_count"));
+			}
 
 			if (request.getParameter(pid + "p_price") != null
 					&& request.getParameter(pid + "p_price").matches("[0-9]+")) {
@@ -96,18 +100,16 @@ public class PurchaseController {
 						+ Integer.parseInt(request
 								.getParameter(pid + "p_price"));
 			}
-			String p_source_id = request.getParameter(pid + "p_source_id");
+			
 			total = total + p_price*p_count_in;
 			purchaseDetail = new PurchaseDetail();
 			purchaseDetail.setP_count_in(p_count_in);
-			purchaseDetail.setP_price(p_price);
+		
 			purchaseDetail.setP_id(Integer.parseInt(pid));
 			purchaseDetail.setPurchase_id(purchase_id);
-			if(p_source_id!=null && p_source_id.matches("[0-9]+")){
-				purchaseDetail.setP_source_id(Integer.parseInt(p_source_id));
-			}else{
-				purchaseDetail.setP_source_id(0);
-			}
+			
+			purchaseDetail.setFree_count(free_count);
+			
 		
 			purchaseDetailList.add(purchaseDetail);
 		}
@@ -117,6 +119,7 @@ public class PurchaseController {
 		purchase.setCreate_date(d);
 		purchase.setSigner(signer);
 		purchase.setTotal(total);
+		purchase.setSupplier_id(request.getParameter("supplier_id"));
 		
 		purchase.setPurchaseDetailList(purchaseDetailList);
 

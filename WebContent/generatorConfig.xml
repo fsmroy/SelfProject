@@ -3,7 +3,7 @@
 <generatorConfiguration>
 
 	<classPathEntry
-		location="C:\Users\Roy\Desktop\work\workspace\BeiBei\WebContent\WEB-INF\lib\mysql-connector-java-5.0.7-bin.jar" />
+		location="C:\Users\Roy\git\SelfProject\WebContent\WEB-INF\lib\mysql-connector-java-5.0.7-bin.jar" />
 	<context id="context1">
 
 
@@ -17,7 +17,7 @@
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/clc_data" userId="root"
-			password="1234" />
+			password="abacus" />
 		<javaModelGenerator targetPackage="com.beibei.erp.bean"
 			targetProject="BeiBei" />
 		<sqlMapGenerator targetPackage="com.beibei.erp.mapper"
@@ -27,6 +27,25 @@
 
 
 		<!-- 
+		
+		
+			<table schema="" tableName="purchase" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="purchase_id" property="purchase_id"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="signer" property="signer"
+				javaType="String" jdbcType="VARCHAR" />
+			<columnOverride column="create_date" property="create_date"
+				javaType="java.util.Date" jdbcType="DATE" />
+			<columnOverride column="total" property="total"
+				javaType="int" jdbcType="INTEGER" />
+			
+		</table>
+		
+		
+		-->
+		
 		<table schema="" tableName="product" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
@@ -71,9 +90,7 @@
 
 		</table>
 		
-		
-		
-		<table schema="" tableName="purchase" enableCountByExample="false"
+			<table schema="" tableName="purchase" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<columnOverride column="purchase_id" property="purchase_id"
@@ -84,9 +101,12 @@
 				javaType="java.util.Date" jdbcType="DATE" />
 			<columnOverride column="total" property="total"
 				javaType="int" jdbcType="INTEGER" />
+				<columnOverride column="supplier_id" property="supplier_id"
+				javaType="String" jdbcType="VARCHAR" />
 			
 		</table>
-		-->
+	
+		
 		<table schema="" tableName="purchase_detail" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
@@ -96,12 +116,11 @@
 				javaType="int" jdbcType="INTEGER" />
 			<columnOverride column="p_count_in" property="p_count_in"
 				javaType="int" jdbcType="INTEGER" />
-			<columnOverride column="p_price" property="p_price"
+		<columnOverride column="p_price" property="p_price"
 				javaType="int" jdbcType="INTEGER" />
-			<columnOverride column="p_source_id" property="p_source_id"
+			
+			<columnOverride column="free_count" property="free_count"
 				javaType="int" jdbcType="INTEGER" />
-				<columnOverride column="supplier_id" property="supplier_id"
-				javaType="String" jdbcType="VARCHAR" />
 		</table>
 		
 		<!--
