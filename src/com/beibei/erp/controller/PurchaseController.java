@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -172,19 +173,40 @@ public class PurchaseController {
 		System.out.println("query:" + map);
 		List<Purchase> purchaseList = purchaseDao.selectByDate(map);
 		List<PurchaseDetail> purchaseDetailList = null;
+		
+		Map<String,Object> tempMap;
+		JSONArray json = new JSONArray();
+		
 		for (Purchase purchase : purchaseList) {
 			purchaseDetailList = purchaseDetailDao.selectByPurchaseid(purchase.getPurchase_id());
-			purchase.setPurchaseDetailList(purchaseDetailList);		
+			purchase.setPurchaseDetailList(purchaseDetailList);	
+			
+			tempMap = new HashMap<String,Object>();
+			tempMap.put("purchase_id", purchase.getPurchase_id());
+			tempMap.put("signer", purchase.getSigner());
+			tempMap.put("createDate", purchase.getCreateDate());
+			tempMap.put("total", purchase.getTotal());
+			tempMap.put("supplier_id", purchase.getSupplier_id());
+			tempMap.put("supplier_name", purchase.getSupplier_name());
+			
+			//tempMap.put("supplier_name", purchase.getPurchase_id());
+			
+			JSONObject obj = null;
 			for (PurchaseDetail detail : purchaseDetailList) {
 				detail.setJsonId(detail.getPk() + detail.getPurchase_id());
+				obj = new JSONObject();
+				obj = JSONObject.fromObject(detail);
+				obj.putAll(tempMap);
+				json.add(obj);
+				
 			}		
 			//for treegrid	
-			purchase.setJsonId(purchase.getPurchase_id());
-			purchase.setChildren(purchaseDetailList);
+			//purchase.setJsonId(purchase.getPurchase_id());
+			//purchase.setChildren(purchaseDetailList);
 		}
 	
-		JSONArray json = new JSONArray();
-		json = json.fromObject(purchaseList);
+		
+		//json = json.fromObject(purchaseList);
 		System.out.println(json.toString());
 		//接著用TREEGRID
 
@@ -202,6 +224,25 @@ public class PurchaseController {
 		TrialService.trial(mav);
 		return mav;
 
+	}
+	
+	public static void main(String[] args){
+	
+		Calendar cal = Calendar.getInstance();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
+		for(int i = 0 ; i < 120 ; i ++){
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			
+			System.out.println(sdf.format(cal.getTime()) + "    第" + cal.get(Calendar.WEEK_OF_MONTH) + "週");
+		}
+		
+		
+		
+		
+		
+		
 	}
 
 }

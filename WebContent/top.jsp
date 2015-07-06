@@ -16,22 +16,27 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-
+				
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">基本資料
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="supplier">供應商資料</a></li>
+						<li><a href="warehousemain">產品資料</a></li>
+						
+					</ul></li>
+					
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">庫存管理
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="supplier">供應商資料</a></li>
-						<li><a href="warehousemain">產品管理</a></li>
+					
 						<li><a href="purchase">產品進貨</a></li>
 						<li><a href="purchasemain">進貨列表</a></li>
 						<li><a href="deliver">產品出貨</a></li>
 						<li><a href="delivermain">出貨列表</a></li>
-					
-
-
-
 					</ul></li>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"

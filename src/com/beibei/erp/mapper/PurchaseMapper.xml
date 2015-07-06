@@ -148,6 +148,7 @@
     <result column="create_date" jdbcType="VARCHAR" property="createDate" />
     <result column="total" jdbcType="INTEGER" property="total" />
      <result column="supplier_id" jdbcType="VARCHAR" property="supplier_id" />
+      <result column="supplier_name" jdbcType="VARCHAR" property="supplier_name" />
   </resultMap>
   
    <insert id="insertHasDate" parameterType="com.beibei.erp.bean.Purchase">
@@ -166,12 +167,14 @@
     order by create_date desc
   </select>
   
+  
+  
   <select id="selectByDate" parameterType="Map" resultMap="Base2ResultMap">
   
     select 
-    <include refid="Base_Column_List" />
-    from purchase
-    where create_date &gt;= #{startDate} and create_date &lt;= #{endDate}  order by create_date desc
+     purchase.pk, purchase.purchase_id, purchase.signer, purchase.create_date, purchase.total, purchase.supplier_id , supplier.supplier_name
+    from purchase , supplier
+    where create_date &gt;= #{startDate} and create_date &lt;= #{endDate} and supplier.supplier_id = purchase.supplier_id  order by create_date desc
   </select>
   
   

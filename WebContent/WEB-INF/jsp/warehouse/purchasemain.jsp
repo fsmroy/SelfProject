@@ -100,7 +100,7 @@
 				dataType : "json",
 				success : function(data) {
 
-					iniTreegrid(data);
+					iniDatagrid(data);
 					setFilter();
 				},
 				error : function(a, b, c) {
@@ -111,9 +111,81 @@
 		
 	}
 
-	function iniTreegrid(data) {
+	function iniDatagrid(data) {
+		
+		
+		$('#tt').datagrid({
+			
 
-		$('#tt').treegrid({
+			singleSelect : true,
+			rownumbers : true,
+			data : data,
+			
+			idField : 'jsonId',
+			singleSelect : true,
+		
+		
+			pagination : true,
+			pageSize : 15,
+
+			pageList : [ 10, 15, 20, 25 ],
+			//columns :  [propertiesColumn],
+			columns : [ [ 
+			 {
+				field : 'purchase_id',
+				title : '進貨編號',
+				width : 200
+			}, {
+				field : 'total',
+				title : '進貨單總額',
+				width : 100,
+				align : "cneter",
+				dataalign : "right"
+			}, {
+				field : 'p_num',
+				title : '產品編號',
+				align : "center",
+				dataalign : "right"
+			}, {
+				field : 'p_name',
+				title : '產品名稱',
+				width : 300,
+				align : "center"
+			}, {
+				field : 'p_count_in',
+				title : '進貨數量',
+				align : 'right'
+			}, {
+				field : 'p_price',
+				title : '進貨單價',
+				align : 'right'
+			}, {
+				field : 'free_count',
+				title : '搭贈數量',
+				align : 'right'
+			}, {
+				field : 'supplier_name',
+				title : '供應商號',
+				align : 'right'
+			},{
+				field : 'signer',
+				title : '進貨人',
+				width : 100,
+				align : "cneter",
+				dataalign : "right"
+			}, {
+				field : 'createDate',
+				title : '進貨日期',
+				width : 200,
+				align : "cneter",
+				dataalign : "right"
+			}
+
+			] ]
+		});
+		
+
+		/*$('#tt').treegrid({
 
 			idField : 'jsonId',
 			treeField : 'purchase_id',
@@ -169,7 +241,7 @@
 			] ],
 			animate : false,
 			rownumbers : true
-		});
+		});*/
 
 	}
 </script>

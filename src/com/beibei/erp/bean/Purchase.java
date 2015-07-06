@@ -186,6 +186,16 @@ public class Purchase {
 		this.createDate = createDate;
 	}
 	
+	private String supplier_name;
+
+	public String getSupplier_name() {
+		return supplier_name;
+	}
+
+	public void setSupplier_name(String supplier_name) {
+		this.supplier_name = supplier_name;
+	}
+	
 	
 	
 	
