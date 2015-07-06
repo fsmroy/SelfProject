@@ -35,16 +35,22 @@
 
 
 <title>成亮公司庫存管理</title>
-
+<style>
+  .datagrid-cell{
+   font-size: 18px;
+	line-height: 30px;
+	text-shadow: 1px 1px 1px #fff;
+  }
+</style>
 
 <script language="javascript">
 	$(document).ready(function() {
 		$("#startDate").datepicker({
 			defaultDate : "-1m",
 			changeMonth : true,
-			showOn: "both",
-			buttonImage: "../common/img/calendar.png",
-			buttonImageOnly: true,
+			showOn : "both",
+			buttonImage : "../common/img/calendar.png",
+			buttonImageOnly : true,
 			numberOfMonths : 2,
 			maxDate : "-1d",
 			dateFormat : "yy-mm-dd",
@@ -59,9 +65,9 @@
 			defaultDate : "0d",
 			maxDate : "0d",
 			dateFormat : "yy-mm-dd",
-			showOn: "both",
-			buttonImage: "../common/img/calendar.png",
-			buttonImageOnly: true,
+			showOn : "both",
+			buttonImage : "../common/img/calendar.png",
+			buttonImageOnly : true,
 			changeMonth : true,
 			numberOfMonths : 2,
 			onClose : function(selectedDate) {
@@ -102,7 +108,74 @@
 
 	function iniTreegrid(data) {
 
-		$('#tt').treegrid({
+		$('#tt').datagrid({
+
+			singleSelect : true,
+			rownumbers : true,
+			data : data,
+			
+
+			idField : 'jsonId',
+			singleSelect : true,
+
+			pagination : true,
+			pageSize : 10,
+
+			pageList : [ 10, 15, 20, 25 ],
+			//columns :  [propertiesColumn],
+			columns : [ [ {
+				field : 'deliver_id',
+				title : '出貨編號',
+				align : "cneter",
+				
+			}, {
+				field : 'customer',
+				title : '客戶',
+			
+				align : "cneter",
+				dataalign : "right"
+			}, {
+				field : 'total',
+				title : '出貨總額',
+				
+				align : "right",
+				dataalign : "right"
+			}, {
+				field : 'createDate',
+				title : '出貨日期',
+				
+				align : "cneter",
+				
+			}, {
+				field : 'p_num',
+				title : '產品編號',
+				align : "center",
+				
+			}, {
+				field : 'p_name',
+				title : '產品名稱',
+				width : 300,
+				align : "center"
+			}, {
+				field : 'p_count_out',
+				title : '出貨數量',
+				align : 'right'
+			}, {
+				field : 'p_price',
+				title : '出貨單價',
+				align : 'right'
+			}, {
+				field : 'signer',
+				title : '出貨人',
+			
+				align : "cneter",
+				dataalign : "right"
+			},
+
+			] ],
+		});
+
+		/*$('#tt').treegrid({
 
 			idField : 'jsonId',
 			treeField : 'deliver_id',
@@ -159,7 +232,7 @@
 			] ],
 			animate : false,
 			rownumbers : true
-		});
+		});*/
 
 	}
 </script>
@@ -177,7 +250,7 @@
 			<tr>
 
 				<td align="center">
-					<table width="80%">
+					<table width="95%">
 						<tr>
 							<td align="left"><label
 								style="font-size: 26px; font-weight: bold;">出貨列表</label></td>

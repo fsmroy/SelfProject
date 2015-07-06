@@ -161,18 +161,40 @@ public class DeliverController {
 		map.put("endDate", endDate);
 		List<Deliver> deliverList = deliverDao.selectByDate(map);
 		List<DeliverDetail> deliverDetailList = null;
+		
+		Map<String,Object> tempMap;
+		JSONArray json = new JSONArray();
+		
+		
 		for (Deliver deliver : deliverList) {
 			deliverDetailList = deliverDetailDao.selectByDeliverid(deliver.getDeliver_id());
 			deliver.setDeliverDetailList(deliverDetailList);	
+			
+			tempMap = new HashMap<String,Object>();
+			
+			tempMap = new HashMap<String,Object>();
+			tempMap.put("deliver_id", deliver.getDeliver_id());
+			tempMap.put("signer", deliver.getSigner());
+			tempMap.put("createDate", deliver.getCreateDate());
+			tempMap.put("total", deliver.getTotal());
+			tempMap.put("customer", deliver.getCustomer());
+			
+			
+			JSONObject obj = null;
 			for (DeliverDetail detail : deliverDetailList) {
 				detail.setJsonId(detail.getPk() + detail.getDeliver_id());
+				
+				obj = new JSONObject();
+				obj = JSONObject.fromObject(detail);
+				obj.putAll(tempMap);
+				json.add(obj);
 			}	
 			//for treegrid	
 			deliver.setJsonId(deliver.getDeliver_id());
 			deliver.setChildren(deliverDetailList);
 		}
-		JSONArray json = new JSONArray();
-		json = json.fromObject(deliverList);
+		//JSONArray json = new JSONArray();
+		//json = json.fromObject(deliverList);
 		System.out.println(json.toString());
 		//接著用TREEGRID
 		return json.toString();

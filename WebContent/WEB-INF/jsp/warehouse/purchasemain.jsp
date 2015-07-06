@@ -38,7 +38,13 @@
 
 <title>成亮公司庫存管理</title>
 
-
+<style>
+  .datagrid-cell{
+   font-size: 18px;
+	line-height: 30px;
+	text-shadow: 1px 1px 1px #fff;
+  }
+</style>
 <script language="javascript">
 	$(document).ready(function() {
 
@@ -126,7 +132,7 @@
 		
 		
 			pagination : true,
-			pageSize : 15,
+			pageSize : 10,
 
 			pageList : [ 10, 15, 20, 25 ],
 			//columns :  [propertiesColumn],
@@ -259,7 +265,7 @@
 			<tr>
 
 				<td align="center">
-					<table width="80%">
+					<table width="95%">
 						<tr>
 							<td align="left"><label
 								style="font-size: 26px; font-weight: bold;">進貨列表</label></td>

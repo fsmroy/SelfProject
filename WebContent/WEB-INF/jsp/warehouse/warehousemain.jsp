@@ -53,7 +53,13 @@
 
 
 <title>成亮公司庫存管理</title>
-
+<style>
+  .datagrid-cell{
+   font-size: 18px;
+	line-height: 30px;
+	text-shadow: 1px 1px 1px #fff;
+  }
+</style>
 
 <script language="javascript">
 	function querySupplier() {
@@ -195,7 +201,7 @@
 			selectOnCheck : true,
 			checkOnSelect : true,
 			pagination : true,
-			pageSize : 15,
+			pageSize : 10,
 
 			pageList : [ 10, 15, 20, 25 ],
 			//columns :  [propertiesColumn],

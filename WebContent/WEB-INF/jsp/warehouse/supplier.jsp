@@ -48,7 +48,13 @@
 
 
 <title>成亮公司庫存管理</title>
-
+<style>
+  .datagrid-cell{
+   font-size: 18px;
+	line-height: 30px;
+	text-shadow: 1px 1px 1px #fff;
+  }
+</style>
 
 <script language="javascript">
 	$(document).ready(function() {
